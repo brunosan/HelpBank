@@ -1,0 +1,31 @@
+<div id="service_list" >
+<h1>Listing services</h1>
+
+<table> 
+  <% @services.each do |service| %>
+    <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
+      <td>
+        <%= image_tag(service.image_url, :class => 'list_image') %>
+      </td>
+      <td class="list_description"> 
+        <dl>
+          <dt><%= service.title %></dt> 
+          <dd><%= truncate(strip_tags(service.description),
+                           :length => 80) %></dd>
+        </dl> 
+      </td>
+      <td class="list_actions">
+        <%= link_to 'Show', service %><br/>
+        <%= link_to 'Edit', edit_service_path(service) %><br/>
+        <%= link_to 'Destroy', service, :confirm => 'Are you sure?',
+          :method => :delete %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+
+<br />
+
+<%= link_to 'New service', new_service_path %>
+
